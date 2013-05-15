@@ -1,0 +1,222 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Contacto - FornerArquitectos</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <!-- CSS: implied media=all -->
+  <!-- CSS concatenated and minified via ant build script-->
+  	
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+	
+	<script>
+	function placeholder(){
+		$('#name', '#contacto').placeholder({text: 'Nombre'});
+		$('#mail', '#contacto').placeholder({text: 'Correo'});
+		$('#comentario', '#contacto').placeholder({text: 'Comentario'});
+	}
+	$(document).ready(function() {
+			$('#palmericas').css({
+				'left': ($(window).width() - 3000)/2
+			});
+		});
+	$(window).load(function(){
+		var t = setTimeout("placeholder()", 600);
+	})
+  </script>
+
+	<script type="text/javascript">
+	WebFontConfig = {
+	google: { families: [ 'Abel::latin' ] },
+	active: function() {
+		
+  	}
+  };
+  (function() {
+	var wf = document.createElement('script');
+	wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+	  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+	wf.type = 'text/javascript';
+	wf.async = 'true';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(wf, s);
+  })(); 
+  
+	</script>
+
+  	
+    
+  <link rel="stylesheet" href="assets/css/style_inv.css">
+  <link rel="stylesheet" href="assets/css/960.css">
+    
+
+  <!-- end CSS-->
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except for Modernizr / Respond.
+       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
+       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="assets/js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+
+  <div id="container" >
+    <header class="container_12">
+		<div id="logo" class="grid_3">
+		</div>
+		<div id="nav" class="push_5 grid_4">
+			<ul>
+				<li><a href="index.html">Inicio</a></li>
+				<li><a href="proyectos.html">Proyectos</a></li>
+				<li><a href="#" class="selected">Contacto</a></li>
+			</ul>
+		</div>
+    </header>
+    <div id="main" role="main" class="container_12">
+		<div id="manifesto" class="grid_8 push_2">
+			<h1>Contacto</h1>
+			<h2 id="linea" class="grid_6 push_1">
+			</h2>
+		</div>
+		<div id="contactoContent" class="container_12">
+			<div class="clear"></div>
+			<div id="direccionContent" class="grid_3 push_2 omega" style="height:225px;">
+			<p><strong>jm&amp;d Forner&acute;s Arquitectos</strong></p>
+			<p>C/ Uberna N&deg;6 AC 03202</p>
+			<p>Elche (Alicante) Espa&ntilde;a</p>
+			<p><strong>TLF/FAX</strong> 0034 965 453 944</p>
+			<h2 id="" style="width:100px; margin-top: 0px; border-top: 1px solid #e8e0ba;"></h2>
+			<p>info@fornerarquitectos.es</p>
+			<p>diana@fornerarquitectos.es</p>
+			<p>jm@fornerarquitectos.es</p>
+			</div>
+			<div id="formulario" class="grid_5">
+			<form id="contacto" action="assets/bin/form.php" method="post">
+				<input id="name" type="text" name="nombre" style="height: 40px;" class="grid_5 push_2" />
+				<input id="mail" type="text" name="Email" style="height: 40px;  margin-top:20px;" class="grid_5 push_2" />
+				<textarea id="comentario" name="comentario" style="height:110px;margin-top:20px; margin-left:10px;" class="push_2 grid_5"></textarea>
+				<div class="clear"></div>
+				<div id="send" class="grid_2 push_5 omega" style="background: #434b53; border: 1px solid #b6b39a; text-align: center; padding: 15px 0px; margin-top: 15px;">ENVIAR</div>
+			</form>
+			<div id="map" class="grid_8 pull_1 omega" style="margin-top: 20px;">
+			<a href="http://g.co/maps/aed76">
+			<img src="http://maps.google.com/maps/api/staticmap?zoom=16&size=620x200&maptype=street&markers=color:0xe8e0ba|label:F|38.267278,-0.698286&sensor=false"/></a></div>
+			</div>
+		</div>
+    </div>
+	<div class="clear"></div>
+    <footer>
+		<div id="palmericas"></div>
+		<div id="footer_bg_container" class="container_12">
+		<div id="footer_grid" class="container_12">
+			<div id="copyright" class="grid_7">
+				<p>jm&amp;d Forner&acute;s Arquitectos 2011. Todos los derechos reservados.</p>
+			</div>
+			<div id="social" class="grid_2 push_3">
+				<ul>
+					<li id="f_icon"><a href="http://www.facebook.com/pages/FornerArquitectos-JMD/312709282080447" target="_blank"></a></li>
+					<li id="t_icon"><a href="http://twitter.com/fornerarquitect" target="_blank"></a></li>
+					<li id="v_icon"><a href="http://vimeo.com/FornerArquitectos" target="_blank"></a></li>
+					<li id="y_icon"><a href="http://www.youtube.com/user/FornerArquitectos" target="_blank"></a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+
+
+
+  <!-- scripts concatenated and minified via ant build script-->
+	<script defer src="assets/js/plugins.js"></script>
+  <!-- end scripts-->
+ <script>
+ 		$('#send').click(function(){
+			$("#contacto").submit();
+		});
+		
+		var v, elem = $('#name');
+			window.setTimeout(function() {
+			v = elem.position().left;
+			console.log(v);
+			if (v) {
+				return false;
+			}
+			window.setTimeout(arguments.callee, 1);
+			}, 1);
+		
+		
+		$("#contacto").submit(function(){
+			$("body").css("cursor", "progress");
+			$('#send').off();
+			$.ajax({
+				type: "POST",
+				url: "assets/bin/form.php",
+				data: $("#contacto").serialize(),
+				dataType: "json",
+				async: 'true',
+				success: function(json){
+					alert('bien! ' + json.message);
+					$('#contacto').each(function(){this.reset();});
+					$('#name', '#contacto').placeholder({text: 'Nombre'});
+					$('#mail', '#contacto').placeholder({text: 'Correo'});
+					$('#comentario', '#contacto').placeholder({text: 'Comentario'});
+					$("body").css("cursor", "default");
+					$('#send').click(function(){
+						$("#contacto").submit();
+					});
+				},
+				error: function(){
+					alert('Something went terribly wrong! Prueba en un rato');
+					$("body").css("cursor", "default");
+					$('#send').click(function(){
+						$("#contacto").submit();
+					});
+				}
+			});
+			//make sure the form doesn't post
+			return false;
+		});
+  </script>
+  <!-- Change UA-XXXXX-X to be your site's ID -->
+  <script>
+    window._gaq = [['_setAccount','UA-27668764-1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+  
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+  
+</body>
+</html>
