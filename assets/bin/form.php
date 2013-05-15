@@ -8,7 +8,7 @@ $email = $_POST["Email"];
 $comentario = $_POST['comentario'];
 
 // email info 
-$to = "diana@fornerarquitectos.es";
+$to = "semrah@gmail.com";
 $subject = '"Formulario de Contacto de ' . $name . '"';
 $headers = 'From: " ' . $email . '"' . "\r\n" .
 		'Reply-To: ' . $email . "\r\n" .
