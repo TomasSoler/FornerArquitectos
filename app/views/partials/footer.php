@@ -32,5 +32,6 @@
     setTimeout("lavaLamp('meh')", 2500);
   </script>
   */ ?>
+ <script src="/static/js/phryxus.js"></script>
 </body>
 </html>

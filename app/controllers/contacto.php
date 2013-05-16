@@ -8,6 +8,7 @@ class Contacto extends Controller {
         // to see what lenguage we last visited.
 
 		$template = $this->loadView('contacto');
+        $template->set('inverted', true);
 		$template->render();
 	}
 }

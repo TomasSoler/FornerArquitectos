@@ -7,6 +7,7 @@ class View {
 
 	public function __construct($template)
 	{
+		$this->pageVars['page'] = $template;
 		$this->pageVars[$template] = 'current';
 		$this->template = APP_DIR .'views/'. $template .'.php';
 	}

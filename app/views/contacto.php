@@ -1,59 +1,11 @@
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>FornerArquitectos</title>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<link rel="stylesheet" href="assets/css/style_inv.css">
-<link rel="stylesheet" href="assets/css/960.css">
-<script>document.write('<link rel="stylesheet" href="assets/css/lavalampInv.css">');</script>
-<script type="text/javascript">
-    current = 0;
-
-    //$('body').hide();
-    WebFontConfig = {
-        google: { families: [ 'Abel::latin' ] }
-    };
-
-    (function() {
-        var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-    })(); 
-    </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/libs/jquery-1.7.2.min.js"><\/script>')</script>
-    <script src="assets/js/plugins.js"></script>
-    
-
-</head>
-
-<body>
-
-  <div id="container" >
-    <header class="container_12">
-        <div id="logo" class="grid_3">
-        </div>
-        <div id="nav" class="push_5 grid_4">
-            <ul class="nav">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
-                <li><a href="contacto.html" class="current">Contacto</a></li>
-            </ul>
-        </div>
-    </header>
+    <style>
+        ::-moz-selection { background: #e8e0ba; color: #434b53; text-shadow: none; }
+        ::selection { background: #e8e0ba; color: #434b53; text-shadow: none; }
+    </style>
     <div id="main" role="main" class="container_12">
         <div id="manifesto" class="grid_8 push_2">
             <h1>Contacto</h1>
-            <h2 id="linea" class="grid_6 push_1"></h2>
+            <span class="grid_6 push_1 linea" style="margin-bottom: 20px"></span>
         </div>
         <div id="contactoContent" class="container_12">
             <div class="clear"></div>
@@ -69,9 +21,9 @@
             </div>
             <div id="formulario" class="grid_5">
                 <form id="contacto" action="assets/bin/form.php" method="post">
-                    <input id="name" type="text" name="nombre" style="height: 40px;" class="grid_5 push_2" />
-                    <input id="mail" type="text" name="Email" style="height: 40px;  margin-top:20px;" class="grid_5 push_2" />
-                    <textarea id="comentario" name="comentario" style="height:110px;margin-top:20px; margin-left:10px;" class="push_2 grid_5"></textarea>
+                    <input id="name" type="text" name="nombre" style="height: 40px;" class="grid_5 push_2" placeholder="Nombre"/>
+                    <input id="mail" type="text" name="Email" style="height: 40px;  margin-top:20px;" class="grid_5 push_2" placeholder="Correo"/>
+                    <textarea id="comentario" name="comentario" style="height:110px;margin-top:20px; margin-left:10px; padding-top: 5px;" class="push_2 grid_5" placeholder="Comentario"></textarea>
                     <div class="clear"></div>
                     <div id="send" class="grid_2 push_5 omega" style="background: #434b53; border: 1px solid #b6b39a; text-align: center; padding: 15px 0px; margin-top: 15px;">ENVIAR</div>
                 </form>
@@ -83,26 +35,7 @@
         </div>
     </div>
     <div class="clear"></div>
-    <footer>
-        <div id="palmericas"></div>
-        <div id="footer_bg_container" class="container_12">
-            <div id="footer_grid" class="container_12">
-                <div id="copyright" class="grid_7">
-                    <p>jm&amp;d Forner&acute;s Arquitectos 2011. Todos los derechos reservados.</p>
-                </div>
-                <div id="social" class="grid_2 push_3">
-                    <ul>
-                        <li id="f_icon"><a href="http://www.facebook.com/pages/FornerArquitectos-JMD/312709282080447" target="_blank"></a></li>
-                        <li id="t_icon"><a href="http://twitter.com/fornerarquitect" target="_blank"></a></li>
-                        <li id="v_icon"><a href="http://vimeo.com/FornerArquitectos" target="_blank"></a></li>
-                        <li id="y_icon"><a href="http://www.youtube.com/user/FornerArquitectos" target="_blank"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-  </div> <!--! end of #container -->
-    <script src="assets/js/script.js"></script>
+<?php /*
   <script type="text/javascript">
 
   jQuery(document).ready(function($) {
@@ -172,5 +105,4 @@
  <script type="text/javascript">
         setTimeout("lavaLamp('inv')", 2500);
     </script>
-</body>
-</html>
+ */ ?>

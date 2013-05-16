@@ -135,44 +135,7 @@ text-align: center;
 	font-size: 22px;
 }
 
-#main #proyectos #flechaIzda {
-	height: 200px; 
-	width:20px; 
-	margin-left: -30px;
-	float: left;
-}
-#flechaIzda.active {
-	background: url('../img/arrowsSprite.png') 0px;
-}
-#flechaIzda.hover {
-	background: url('../img/arrowsSprite.png') -20px;
-}
-#flechaIzda.clicked {
-	background: url('../img/arrowsSprite.png') -40px;
-}
-#flechaIzda.inactive {
-	background: url('../img/arrowsSprite.png') -60px;
-}
 
-#main #proyectos #flechaDcha {
-	float: right; 
-	margin-right: -10px;
-	height: 200px; 
-	width: 20px; 
-
-}
-#flechaDcha.active {
-	background: url('../img/arrowsSprite.png') -80px;	
-}
-#flechaDcha.hover {
-	background: url('../img/arrowsSprite.png') -100px;
-}
-#flechaDcha.clicked {
-	background: url('../img/arrowsSprite.png') -120px;
-}
-#flechaDcha.inactive {
-	background: url('../img/arrowsSprite.png') -140px;
-}
 
 #descProj {
 	font-family: 'Abel', sans-serif;
@@ -303,6 +266,46 @@ footer #footer_grid #social ul li, #social ul li a {
 	background: url('../img/icons.png');
 	background-position: -175px -25px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 /* TESTEO BARRA PROGRESO SLIDER */
 .progressIndicator {width: 0px;}
