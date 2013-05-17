@@ -6,21 +6,11 @@
     <title>Forner Arquitectos</title>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> <?php // Solo para DEV ?>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> <!-- only for DEV -->
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <link rel="icon" type="image/ico" href="/static/img/favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet/less" type="text/css" href="/static/less/style.less" /> <?php // Solo para DEV ?>
-
-    <?php /* 
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/960.css">
-    <script>document.write('<link rel="stylesheet" href="/static/css/lavalamp.css">');</script>
-    
-    <script type="text/javascript">
-        current = 0;
-    </script>
-    */ ?>
+    <link rel="stylesheet/less" type="text/css" href="/static/less/style.less" /> <!-- only for DEV -->
 </head>
 <body <?= (isset($inverted)) ? 'class="inverted"' :'class="not-inverted"'; ?>>
     <div id="container">

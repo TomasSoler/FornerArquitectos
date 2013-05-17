@@ -29,12 +29,12 @@
                 </form>
                 <div id="map" class="grid_8 pull_1 omega" style="margin-top: 20px;">
                     <a href="http://g.co/maps/aed76">
-                    <img src="http://maps.google.com/maps/api/staticmap?zoom=16&size=620x200&maptype=street&markers=color:0xe8e0ba|label:F|38.267278,-0.698286&sensor=false"/></a>
+                        <img src="http://maps.google.com/maps/api/staticmap?zoom=16&size=620x200&maptype=street&markers=color:0xe8e0ba|label:F|38.267278,-0.698286&sensor=false"/></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="clear"></div>
+        <div class="clear"></div>
 <?php /*
   <script type="text/javascript">
 

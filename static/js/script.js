@@ -1,188 +1,199 @@
-/* Author: 73 Development (Shemes)
-* 
-*/
+/*! Jquery Pause Plugin */
+(function() {
+    var $ = jQuery,
+        pauseId = 'jQuery.pause',
+        uuid = 1,
+        oldAnimate = $.fn.animate,
+        anims = {};
 
+    function now() { return new Date().getTime(); }
 
-/*
-* Cambiar los colores del hover en el css, pero cargar el css por js por si no tiene js que no salga el
-* bloque ni salga el primer elemento en invertido. Plantear la mejor manera de hacerlo:
-*
-*   - Con una serie de clases.
-*   - Con un fichero css definido solo para los cambios CON js.
-*   - Meh.
-*
-*/
-jQuery(document).ready(function($) { 
-    $('#container').fadeIn(1000);
-    $('#palmericas').css({
-        'left': ($(window).width() - 3000)/2
-    });
-    $("#nav ul li").click(function(e){
-        e.preventDefault();
-        var link = $(this).find('a').attr('href');
-        console.log(link);
-        $('#container').fadeOut(400, function() {
-            window.location = link;
+    $.fn.animate = function(prop, speed, easing, callback) {
+        var optall = $.speed(speed, easing, callback);
+        optall.complete = optall.old; // unwrap callback
+        return this.each(function() {
+            // check pauseId
+            if (! this[pauseId])
+                this[pauseId] = uuid++;
+            // start animation
+            var opt = $.extend({}, optall);
+            oldAnimate.apply($(this), [prop, $.extend({}, opt)]);
+            // store data
+            anims[this[pauseId]] = {
+                run: true,
+                prop: prop,
+                opt: opt,
+                start: now(),
+                done: 0
+            };
         });
-    });
+    };
 
-    
+    $.fn.pause = function() {
+        return this.each(function() {
+            // check pauseId
+            if (! this[pauseId])
+                this[pauseId] = uuid++;
+            // fetch data
+            var data = anims[this[pauseId]];
+            if (data && data.run) {
+                data.done += now() - data.start;
+                if (data.done > data.opt.duration) {
+                    // remove stale entry
+                    delete anims[this[pauseId]];
+                } else {
+                    // pause animation
+                    $(this).stop();
+                    data.run = false;
+                }
+            }
+        });
+    };
 
-    $("#manifesto ul li").hide();
+    $.fn.resume = function() {
+        return this.each(function() {
+            // check pauseId
+            if (! this[pauseId])
+                this[pauseId] = uuid++;
+            // fetch data
+            var data = anims[this[pauseId]];
+            if (data && ! data.run) {
+                // resume animation
+                data.opt.duration -= data.done;
+                data.done = 0;
+                data.run = true;
+                data.start = now();
+                oldAnimate.apply($(this), [data.prop, $.extend({}, data.opt)]);
+            }
+        });
+    };
+})();
 
-    $("#manifesto ul li:first").show();
 
-    progressEffect(10, $("#manifesto ul li:first")); 
+/**
+ * Singleton with "register" functionality.
+ *
+ * @see http://codereview.stackexchange.com/questions/15166/best-way-to-organize-javascript-for-website
+ */
 
-    $('#manifesto ul li').mouseover(function() {
-        timerStop();
-    });
+ (function(exports) {
 
-    $('#manifesto ul li').mouseout(function() {
-        timerStop();
-        progressEffect(10, $(this)); 
+    var initialized,
+    registry = []; // Collection of module.
+
+    // Adds module to collection:
+    exports.register = function(moduleDeclaration) {
+        registry.push(moduleDeclaration); // Add module to registry.
+        if (initialized) {
+            moduleDeclaration.call(this); // If Phryxus already initialized, register and execute module immediately.
+        }
+    };
+    // Executes every module:
+    exports.init = function() {
+        initialized = true; // Flippin' switches!
+        // Loop through each module and execute:
+        for (var i = 0, l = registry.length; i < l; i++) {
+            registry[i].call(this); // Call and execute module.
+        }
+    };
+}(window.Phryxus = window.Phryxus || {})); // Use existing namespace or make a new object of that namespace.
+
+
+
+Phryxus.register(function() {
+
+    var slides = {
+
+        // Definitions
+        $slides : $("#manifesto ul li"),
+        $progressBar : $('.progressIndicator'),
+        timer : 6000,
+        transition: 300,
         
-    });
+        init : function() {
+            // Settings
+            this.$slides.hide();
+            this.$slides.first().show();
+            this.$progressBar.css({width: 0}); // Reset to 0 when the page is loaded
+            this.progressEffect(this.timer);
+            this.mouseReactions();
+        },
+        getCurrentWidth: function (ele) {
+            var width = ele.width();
+            var parentWidth = ele.offsetParent().width();
+            var percent = 100*width/parentWidth;
+
+            return percent;
+        },
+        progressEffect: function () {
+            this.$progressBar.animate({width: '100%'}, slides.timer, 'linear', function () {
+                slides.nextSlide();
+            });
+
+        },
+        progressBarFinished: function () {
+            if(this.getCurrentWidth(this.$progressBar)  >= '100' ) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        nextSlide: function () {
+           this.$progressBar.stop();
+            this.$progressBar.css({width: 0});
+            curr = this.$slides.filter(':visible');
+            next = (curr.html() == this.$slides.last().html()) ? this.$slides.first() : curr.next();
+            curr.fadeOut(this.transition, function() { next.fadeIn(slides.transition); slides.progressEffect(slides.timer); });
+        },
+        mouseReactions: function () {
+            this.$slides.on('mouseenter', function() {
+                slides.$progressBar.pause();
+            });
+            this.$slides.on('mouseleave', function() {
+                slides.$progressBar.resume();
+            });
+        }
+
+    }; // slides
+
+    slides.init();
+
 });
 
-function isPBFinished () {
-    if ($('.progressIndicator').width() >= 780) {
-        return true;
-    } else {
-        return false;
-    }
-}
-// Changes #meh images
-function inOut(elem) {
-    timerStop();
-    elem.fadeIn(600).fadeOut(600,
-        function() {
-            if (elem.next().length > 0) { 
-                progressEffect(10,elem.next().fadeIn(600)); 
-            } else { 
-                progressEffect(10,$("#manifesto ul li:first").fadeIn(600));
-                console.log(elem.siblings(':first'));
-            }
-    });
-    
-    $('.progressIndicator').css({width : 0});    
-}
-var timerStop = function(){
-        if(!$("#manifesto ul li").is(":animated")) {
-           
-       }
-        clearInterval(timer);
-       
-}
-function progressEffect(milisecs, ele) {
-    timer = setInterval(function(){
-        $('.progressIndicator').css({width : $('.progressIndicator').width() + 1});
-        if(isPBFinished()) { inOut(ele); }
-    }, milisecs);
-}
+//--------------------------------------------------------------------
 
-function lavaLamp(type) {
-    if(type === 'inv') {
-        $("a.current").css({"color" : "#434B53"});
-        $("ul.nav").lavaLamp({
-            speed: 300,
-        });
-        $("ul.nav li").hover(function() {
-            if ($(this).not("li.selectedLava")) {
-                $("a.current").css({"color" : "#E8E0BA"});
-            }
-        }, function() {
-            if ($(this).not("li.selectedLava")) {
-                $("a.current").css({"color" : "#434B53"}); 
-            }
-        });
-    } else {
-        $("a.current").css({"color" : "#E8E0BA"});
-        $("ul.nav").lavaLamp({
-            speed: 300,
-        });
-        $("ul.nav li").hover(function() {
-            if ($(this).not("li.selectedLava")) {
-                $("a.current").css({"color" : "#434B53"});
-            }
-        }, function() {
-            if ($(this).not("li.selectedLava")) {
-                $("a.current").css({"color" : "#E8E0BA"}); 
-            }
-        });
-    }
-    
-}
-function placeholder(){
-        $('#name', '#contacto').placeholder({text: 'Nombre'});
-        $('#mail', '#contacto').placeholder({text: 'Correo'});
-        $('#comentario', '#contacto').placeholder({text: 'Comentario'});
-}
+/**
+ * Register a new module.
+ * Just testing the waters.
+ */
 
-
-        
-$("#contacto").submit(function(){
-    $("body").css("cursor", "progress");
-    $('#send').off();
-    $.ajax({
-        type: "POST",
-        url: "assets/bin/form.php",
-        data: $("#contacto").serialize(),
-        dataType: "json",
-        async: 'true',
-        success: function(json){
-            alert('bien! ' + json.message);
-            $('#contacto').each(function(){this.reset();});
-            $('#name', '#contacto').placeholder({text: 'Nombre'});
-            $('#mail', '#contacto').placeholder({text: 'Correo'});
-            $('#comentario', '#contacto').placeholder({text: 'Comentario'});
-            $("body").css("cursor", "default");
-            $('#send').click(function(){
-                $("#contacto").submit();
-            });
-        },
-        error: function(){
-            alert('Something went terribly wrong! Prueba en un rato');
-            $("body").css("cursor", "default");
-            $('#send').click(function(){
-                $("#contacto").submit();
-            });
+Phryxus.register(function() {
+    var projects = {
+        init: function() {
+            console.log('loading projects JS...');
         }
-    });
-    //make sure the form doesn't post
-    return false;
-});       
-
-
-    var slides = $("#proyectosCont").find("a").length;
-
-    function slider (dir, vel) {
-
-        if ($("#proyectosCont").not(":animated")) { // no está animado.
-
-            if (dir === "-") {
-                $("#proyectosCont").animate({"left" : dir+"=940"}, vel);
-                console.log("Moviendo 1 bloque a la derecha...");
-                sliderCount = (dir === '-') ? ++sliderCount : --sliderCount;
-            } else if (dir === "+") {
-                $("#proyectosCont").animate({"left" : dir+"=940"}, vel);
-                console.log("Moviendo 1 bloque a la izquierda...");
-                sliderCount = (dir === '-') ? ++sliderCount : --sliderCount;
-            } 
-            
-        } else {
-            $(".flecha").click( function() { return false; } );
-        }
-        //sliderCount = (dir === '-') ? sliderCount++ : sliderCount--;
     }
 
-function sliderChecker() {
-    console.log('SliderCount === ' + sliderCount);
-    
-    if(sliderCount === 0 || sliderCount === (Math.floor(slides/4)-1) ) { 
-        console.log('Final de las slides!');
-        return false; 
-    }
+    projects.init();
+});
 
-    sliderChecker(); 
-}
+//--------------------------------------------------------------------
+
+$(document).ready(function() {
+
+    // /**
+    //  * Executing the init.
+    //  */
+
+    Phryxus.init();
+
+    // //----------------------------------
+
+    // *
+    //  * Register a new module.
+    //  * Testing "after" init.
+
+
+    //  Phryxus.register(function() { console.log('After init...'); });
+
+});

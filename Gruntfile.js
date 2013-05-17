@@ -58,10 +58,10 @@ module.exports = function(grunt) {
     production: {
       options: {
         paths: ["static/css"],
-        yuicompress: /* true*/ false
+        yuicompress: /* true*/ true
       },
       files: {
-        "static/css/mainless.css": "static/less/main.less"
+        "static/css/mainless.css": "static/less/style.less"
       }
     }
   }
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-contrib-less');
 
-  grunt.registerTask('default', ['less', 'ftp-deploy']);
+  grunt.registerTask('default', ['less']);
 
 
   // grunt.registerTask('default', ['jshint', 'concat', 'cssmin', 'uglify', 'ftp-deploy:dev']);
