@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <link rel="icon" type="image/ico" href="/static/img/favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet/less" type="text/css" href="/static/less/style.less" /> <!-- only for DEV -->
+    <link rel="stylesheet" type="text/css" href="/static/css/mainless.css" /> <!-- only for DEV -->
 </head>
 <body <?= (isset($inverted)) ? 'class="inverted"' :'class="not-inverted"'; ?>>
     <div id="container">
