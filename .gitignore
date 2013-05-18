@@ -1,4 +1,4 @@
-sftp-config.json
+
 # Numerous always-ignore extensions
 *.diff
 *.err
@@ -39,3 +39,13 @@ publish
 # build script local files
 build/buildinfo.properties
 build/config/buildinfo.properties
+
+
+###SublimeText###
+*.cache
+Package Control.sublime-settings
+
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+sftp-config*.json
