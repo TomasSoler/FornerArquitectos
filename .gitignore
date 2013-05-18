@@ -40,6 +40,7 @@ publish
 build/buildinfo.properties
 build/config/buildinfo.properties
 
+<<<<<<< HEAD
 
 ###SublimeText###
 *.cache
@@ -57,3 +58,7 @@ sftp-config*.json
 /package.json
 /static/google3d66d2383f9969c9.html
 /app/controllers/mailform.php
+=======
+/__ex/
+/package.json
+>>>>>>> gitignore
