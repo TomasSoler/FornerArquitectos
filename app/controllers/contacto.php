@@ -1,10 +1,4 @@
 <?php
-/**
- * TODO:
- * Check for errors on mail send and log them. 
- * Think about a better way of showing messages on screen, 
- * feedback is not that right.
- */
 class Contacto extends Controller {
 
 	private $_username  = 'gladOS@73dev.com';
@@ -49,36 +43,30 @@ class Contacto extends Controller {
 
 		$this->message = Swift_Message::newInstance()
 		->setSubject('Formulario de contacto')
-
-			// Set the From address with an associative array
 		->setFrom(array('gladOS@73dev.com' => 'GladOS'))
-
-			// Set the To addresses with an associative array
 		->setTo(array('semrah@gmail.com')) // diana@fornerarquitectos.es
-
-			// Give it a body
 		->addPart('<html>
 			<head>
 			<title>Formulario de contacto</title>
 			<style type="text/css">
 			</style>
 			</head>
-			<body>
-			<table  width="100%" border="1" cellspacing="2" cellpadding="2">
-			<tr bgcolor="#eeffee">
-			<td>Nombre</td>
-			<td>' . $this->name . ' </td>
-			</tr>
-			<tr bgcolor="#eeeeff">
-			<td>Email</td>
-			<td>' . $this->email . ' </td>
-			</tr>
-			<tr bgcolor="#eeffee">
-			<td>Contenido</td>
-			<td>' . nl2br($this->comment) . ' </td>
-			</tr>
-			</table>
-			</body>
+				<body>
+					<table  width="100%" border="1" cellspacing="2" cellpadding="2">
+						<tr bgcolor="#eeffee">
+							<td>Nombre</td>
+							<td>' . $this->name . ' </td>
+						</tr>
+						<tr bgcolor="#eeeeff">
+							<td>Email</td>
+							<td>' . $this->email . ' </td>
+						</tr>
+						<tr bgcolor="#eeffee">
+							<td>Contenido</td>
+							<td>' . nl2br($this->comment) . ' </td>
+						</tr>
+					</table>
+				</body>
 			</html>', 'text/html');
 
 		
