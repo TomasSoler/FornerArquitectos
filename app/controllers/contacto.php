@@ -13,35 +13,20 @@ class Contacto extends Controller {
 	protected $logfile    = '../sentMails.log';
 	private $message;
 	private $mailer;
+	private $failures;
+
 
 	public function __construct() {
 		$this->loadPlugin('swiftmailer');
-			// $this->loadPlugin('logger');
 		if (!file_exists($this->logfile)) {
 			if (!touch($this->logfile)) throw new \InvalidArgumentException('Log file ' . $this->logfile . ' cannot be created');
 		}
 		if (!is_writable($this->logfile)) throw new \InvalidArgumentException('Log file ' . $this->logfile . ' is not writeable');
-			// $this->log('testing the log thingy!');
 		$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
 		->setUsername($this->_username)
 		->setPassword($this->_password)
 		;
 		$this->mailer = Swift_Mailer::newInstance($transport);
-			// $this->message = Swift_Message::newInstance()  
-			//     // Give the message a subject
-			//     ->setSubject('Testing 1... 2 ... 3')
-
-			//     // Set the From address with an associative array
-			//     ->setFrom(array('gladOS@73dev.com' => 'GladOS'))
-
-			//     // Set the To addresses with an associative array
-			//     ->setTo(array('semrah@gmail.com'))
-
-			//     // Give it a body
-			//     ->setBody('Here is the message itself')
-
-			//     // And optionally an alternative body
-			//     ->addPart('<q>Here is the message itself</q>', 'text/html');
 	}
 
 	function index()
@@ -69,7 +54,7 @@ class Contacto extends Controller {
 		->setFrom(array('gladOS@73dev.com' => 'GladOS'))
 
 			// Set the To addresses with an associative array
-		->setTo(array('semrah@gmail.com'))
+		->setTo(array('semrah@gmail.com')) // diana@fornerarquitectos.es
 
 			// Give it a body
 		->addPart('<html>
@@ -96,38 +81,47 @@ class Contacto extends Controller {
 			</body>
 			</html>', 'text/html');
 
-			// And optionally an alternative body
-
-
-		try {
-			$this->message->setReplyTo($this->email);
-		} catch (Swift_RfcComplianceException $e) {
-			print_r($e->getMessage());
-		}
-		if ( $this->name != "" || $this->email != "" || $this->comment != "") {
+		
+		if ( $this->name != "" && $this->email != "" && $this->comment != "") {
 			try {
-				if ($this->mailer->send($this->message, $this->failures)) {
-					$status = TRUE;
-					$message = 'Mensaje enviado.';
-					$this->log('Correo enviado satisfactoriamente desde ' . $this->email . ' a FornerArquitectos.');
-				} else {
-					print_r($this->failures);
-				}
-
+				$this->message->setReplyTo($this->email);
 			} catch (Swift_RfcComplianceException $e) {
-				print('Email address not valid:' . $e->getMessage());
+				$status = FALSE;
+				$status_message = 'ERROR: Dirección de correo inválida.';
 			}
+			if(!isset($status) || $status != FALSE) {
+				try {
+					if ($this->mailer->send($this->message, $this->failures)) {
+						$status = TRUE;
+						$status_message = 'Mensaje enviado, nos pondremos en contacto con la mayor brevedad posible.';
+						$this->log('Correo enviado satisfactoriamente desde ' . $this->email . ' a FornerArquitectos.');
+
+					} else {
+						$status = FALSE;
+						$status_message = $this->failures;
+					}
+
+				} catch (Exception $e) {
+					$status = FALSE;
+					$status_message = 'ERROR:' . $e->getMessage();
+				}
+			}
+
 		} else {
 			$status = FALSE;
-			$message = "Los campos 'Nombre', 'Email', y 'Mensaje', son obligatorios";
+			$status_message = "ERROR: Los campos 'Nombre', 'Email', y 'Mensaje', son obligatorios";
 		}
-		$json = array(
-			'status' => $status,
-			'message' => $message,
-			);
-		// echo json_encode($json);
-		$this->redirect('contacto');
 
+		if(isset($_POST['is_ajax'])) {
+			$json = array(
+			'response' => $status,
+			'status_message' => $status_message
+			);
+			header('Content-type: application/json');
+			return json_encode($json);
+		} else {
+			return $status_message;
+		}
 	}
 	private function log($message) {
 		$logline = '[' . date('Y-m-d h:m:i') . '] ' . $message . "\n";

@@ -7,6 +7,7 @@
             <h1>Contacto</h1>
             <span class="grid_6 push_1 linea" style="margin-bottom: 20px"></span>
         </div>
+
         <div id="contactoContent" class="container_12">
             <div class="clear"></div>
             <div id="direccionContent" class="grid_3 push_2 omega" style="height:225px;">
@@ -36,74 +37,3 @@
             </div>
         </div>
         <div class="clear"></div>
-<?php /*
-  <script type="text/javascript">
-
-  jQuery(document).ready(function($) {
-    $('#send').click(function(){
-            $("#contacto").submit();
-        });
-            
-        var v, elem = $('#name');
-        window.setTimeout(function() {
-            v = elem.position().left;
-            console.log(v);
-            if (v) {
-                return false;
-            }
-            window.setTimeout(arguments.callee, 1);
-        }, 1);
-
-
-       //MEH 
-       
-        $.fn.placeholder = function(options) {
-        var that = this;
-        var defaults = {
-             text: 'Placeholder'
-        };
-          
-        options = $.extend(defaults, options);
-          
-        if(navigator.userAgent.indexOf('Mac') != -1) {
-            var top = that.offset().top + 23;
-            var left = that.offset().left;
-        } else {
-            var top = that.offset().top + 23;
-            var left = that.offset().left;
-        }
-        return that.each(function() {
-          
-            $('<span class="placeholder"/>').text(options.text)
-                .css({
-                    position: 'absolute',
-                    top: top,
-                    left: left
-                }).insertAfter(that);
-
-            that.focus(function() {
-                that.next('span.placeholder').hide();
-            });
-
-            that.blur(function() {
-                if(that.val() == '') {
-                    that.next('span.placeholder').show();
-                }
-            }); 
-        });
-    };
-
-    if ($(window).height() < 840) {
-        $('#map').empty().append('<a href="http://g.co/maps/aed76"><img src="http://maps.google.com/maps/api/staticmap?zoom=16&size=650x75&maptype=street&markers=color:0xe8e0ba|label:F|38.267278,-0.698286&sensor=false"/></a>');
-    } 
-
-    $(window).load(function(){
-        var t = setTimeout("placeholder()", 600);
-    });
-});
-         
- </script>
- <script type="text/javascript">
-        setTimeout("lavaLamp('inv')", 2500);
-    </script>
- */ ?>
